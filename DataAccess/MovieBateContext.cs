@@ -8,8 +8,8 @@ namespace MovieBate.DataAccess
     public class MovieBateContext : DbContext
     {
 
-        public DbSet<MovieApiResponse> Movies { get; set; }
-        //public DbSet<Review> Reviews { get; set; }
+        public DbSet<ApiResponse> Movies { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         public MovieBateContext(DbContextOptions<MovieBateContext> options) : base(options)
         {

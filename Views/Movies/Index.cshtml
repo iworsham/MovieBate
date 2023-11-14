@@ -1,4 +1,18 @@
-﻿@model MovieApiResponse
+﻿
+
+@model MovieBate.Models.ApiResponse
 
 
-<h1>Hey</h1>
+<h1>Movie Title</h1>
+
+@{
+    foreach(var movie in Model.Search)
+{
+    <p>Title: @movie.Title, Year: @movie.Year</p>
+};
+}
+<h1>Movie Description</h1>
+
+
+
+<h1>Comment Section</h1>

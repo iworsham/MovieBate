@@ -15,7 +15,7 @@ namespace MovieBate.Services
          
         }
 
-        public async Task<MovieApiResponse> GetMovies()
+        public async Task<ApiResponse> GetMovies()
         {
             var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Get, "http://www.omdbapi.com/?s=interstellar&apikey=7661d96a");
@@ -39,7 +39,7 @@ namespace MovieBate.Services
             //}
 
             //return deserializedResponse;
-            return new MovieApiResponse();
+            return new ApiResponse();
         }
     }
 }
