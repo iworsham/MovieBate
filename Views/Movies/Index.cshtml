@@ -8,7 +8,10 @@
 @{
     foreach(var movie in Model.Search)
 {
-    <p>Title: @movie.Title, Year: @movie.Year</p>
+    <h4>@movie.Type</h4>
+    <img src="@movie.Poster" alt="Movie Poster">
+    <p>@movie.Title</p>
+    <p>Year: @movie.Year</p>
 };
 }
 <h1>Movie Description</h1>
