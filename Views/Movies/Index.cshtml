@@ -1,28 +1,29 @@
-﻿
-
+﻿<link href="/css/site.css" rel="stylesheet" />
 @model MovieBate.Models.ApiResponse
 
-<style>
+
+<div class="row">
 
 
-    .container {
-        justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly | start | end | left | right ... + safe | unsafe;
-    }
-</style>
 
 @{
     foreach(var movie in Model.Search)
 {
+    <div class="col">
     <h4>@movie.Type</h4>
-    <img src="@movie.Poster" alt="Movie Poster">
-    <p>@movie.Title</p>
+    <form action="/movies/@Model.Id">
+    <input type="image" src="@movie.Poster" name="movie poster" class="movie-poster" id="saveForm" />
+    </form>
+    <p></p>
+    <H5>@movie.Title</H5>
     <p>Year: @movie.Year</p>
     <p>Movie/Series Description Coming Soon!</p>
-       
-   
+       </div>
+           
+
 };
 
 }
-
+</div>
 
 

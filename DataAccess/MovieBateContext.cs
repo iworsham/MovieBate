@@ -10,6 +10,7 @@ namespace MovieBate.DataAccess
 
         public DbSet<ApiResponse> Movies { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public MovieBateContext(DbContextOptions<MovieBateContext> options) : base(options)
         {

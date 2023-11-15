@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MovieBate.Models;
 using MovieBate.Services;
 using Newtonsoft.Json;
 using System.Text.Json.Serialization;
+using MovieBate.DataAccess;
 
 namespace MovieBate.Controllers
 {
@@ -10,10 +12,12 @@ namespace MovieBate.Controllers
     {
         //  private readonly MovieBateServices _movieServices;
         private readonly IConfiguration _configuration;
+        private readonly MovieBateContext _context;
 
-        public MoviesController(IConfiguration configuration)
+        public MoviesController(IConfiguration configuration, MovieBateContext context)
         {
             _configuration = configuration;
+            _context = context;
 
         }
         //public async Task<IActionResult> Index()
@@ -59,8 +63,45 @@ namespace MovieBate.Controllers
                 // Handle the case where myInstance is still null
                 // Return an appropriate view or error message
             }
+           
+
+
 
             return View(myInstance);
         }
+        [HttpPost]
+        [Route("/Movies/{id}")]
+        public async Task<IActionResult> MovieShow(int id,Comment comment,Movie movie)
+        {
+            //movie.ImdbID = id;
+
+            if (Request.Cookies["AnonUser"] == null)
+            {
+                string anonId = Guid.NewGuid().ToString();
+                var anonUser = new User();
+
+                anonUser.Id = anonId;
+                Response.Cookies.Append("AnonUser", anonId);
+                comment.AnonId = anonId;
+                comment.CreatedAt = DateTime.Now.ToUniversalTime();
+                anonUser.Comments.Add(comment);
+            }
+            else
+            {
+                var anonUser = new User();
+
+                anonUser.Id = Request.Cookies["AnonUser"];
+
+                comment.CreatedAt = DateTime.Now.ToUniversalTime();
+                comment.AnonId = anonUser.Id;
+                anonUser.Comments.Add(comment);
+            }
+
+            _context.Comments.Add(comment);
+            _context.SaveChanges();
+
+            return View();
+        }
+
     }
 }

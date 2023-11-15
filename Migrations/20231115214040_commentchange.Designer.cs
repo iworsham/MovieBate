@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieBate.DataAccess;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MovieBate.Migrations
 {
     [DbContext(typeof(MovieBateContext))]
-    partial class MovieBateContextModelSnapshot : ModelSnapshot
+    [Migration("20231115214040_commentchange")]
+    partial class commentchange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,6 +34,10 @@ namespace MovieBate.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CommentId")
+                        .HasColumnType("integer")
+                        .HasColumnName("comment_id");
+
                     b.Property<string>("Response")
                         .IsRequired()
                         .HasColumnType("text")
@@ -43,6 +50,9 @@ namespace MovieBate.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_movies");
+
+                    b.HasIndex("CommentId")
+                        .HasDatabaseName("ix_movies_comment_id");
 
                     b.ToTable("movies", (string)null);
                 });
@@ -74,18 +84,11 @@ namespace MovieBate.Migrations
                         .HasColumnType("text")
                         .HasColumnName("user_id");
 
-                    b.Property<int>("movieId")
-                        .HasColumnType("integer")
-                        .HasColumnName("movie_id");
-
                     b.HasKey("Id")
                         .HasName("pk_comments");
 
                     b.HasIndex("UserId")
                         .HasDatabaseName("ix_comments_user_id");
-
-                    b.HasIndex("movieId")
-                        .HasDatabaseName("ix_comments_movie_id");
 
                     b.ToTable("comments", (string)null);
                 });
@@ -149,21 +152,24 @@ namespace MovieBate.Migrations
                     b.ToTable("users", (string)null);
                 });
 
+            modelBuilder.Entity("MovieBate.Models.ApiResponse", b =>
+                {
+                    b.HasOne("MovieBate.Models.Comment", "Comment")
+                        .WithMany()
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_movies_comments_comment_id");
+
+                    b.Navigation("Comment");
+                });
+
             modelBuilder.Entity("MovieBate.Models.Comment", b =>
                 {
                     b.HasOne("MovieBate.Models.User", null)
                         .WithMany("Comments")
                         .HasForeignKey("UserId")
                         .HasConstraintName("fk_comments_users_user_id");
-
-                    b.HasOne("MovieBate.Models.Movie", "movie")
-                        .WithMany("Comments")
-                        .HasForeignKey("movieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_comments_movie_movie_id");
-
-                    b.Navigation("movie");
                 });
 
             modelBuilder.Entity("MovieBate.Models.Movie", b =>
@@ -177,11 +183,6 @@ namespace MovieBate.Migrations
             modelBuilder.Entity("MovieBate.Models.ApiResponse", b =>
                 {
                     b.Navigation("Search");
-                });
-
-            modelBuilder.Entity("MovieBate.Models.Movie", b =>
-                {
-                    b.Navigation("Comments");
                 });
 
             modelBuilder.Entity("MovieBate.Models.User", b =>
