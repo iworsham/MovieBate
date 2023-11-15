@@ -2,8 +2,13 @@
 
 @model MovieBate.Models.ApiResponse
 
+<style>
 
-<h1>Movie Title</h1>
+
+    .container {
+        justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly | start | end | left | right ... + safe | unsafe;
+    }
+</style>
 
 @{
     foreach(var movie in Model.Search)
@@ -12,10 +17,12 @@
     <img src="@movie.Poster" alt="Movie Poster">
     <p>@movie.Title</p>
     <p>Year: @movie.Year</p>
+    <p>Movie/Series Description Coming Soon!</p>
+       
+   
 };
+
 }
-<h1>Movie Description</h1>
 
 
 
-<h1>Comment Section</h1>

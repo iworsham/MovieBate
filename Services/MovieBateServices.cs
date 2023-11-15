@@ -17,8 +17,9 @@ namespace MovieBate.Services
 
         public async Task<ApiResponse> GetMovies()
         {
+            var apikey = _configuration["APIKey"];
             var client = new HttpClient();
-            var request = new HttpRequestMessage(HttpMethod.Get, "http://www.omdbapi.com/?s=interstellar&apikey=7661d96a");
+            var request = new HttpRequestMessage(HttpMethod.Get, $"http://www.omdbapi.com/?s=interstellar&apikey={apikey}");
             var response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             Console.WriteLine(await response.Content.ReadAsStringAsync());

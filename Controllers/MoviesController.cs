@@ -8,16 +8,18 @@ namespace MovieBate.Controllers
 {
     public class MoviesController : Controller
     {
-      //  private readonly MovieBateServices _movieServices;
+        //  private readonly MovieBateServices _movieServices;
+        private readonly IConfiguration _configuration;
 
-        public MoviesController()
+        public MoviesController(IConfiguration configuration)
         {
-     //       _movieServices = movieServices;
+            _configuration = configuration;
+
         }
         //public async Task<IActionResult> Index()
         //{
         //    var client = new HttpClient();
-        //    var request = new HttpRequestMessage(HttpMethod.Get, "http://www.omdbapi.com/?s=interstellar&apikey=7661d96a");
+        //    var request = new HttpRequestMessage(HttpMethod.Get, "http://www.omdbapi.com/?s=interstellar&apikey");
         //    var response = await client.SendAsync(request);
         //    response.EnsureSuccessStatusCode();
         //    var json = await response.Content.ReadAsStringAsync();
@@ -30,8 +32,9 @@ namespace MovieBate.Controllers
         //}
         public async Task<IActionResult> Index()
         {
+            var apikey = _configuration["APIKey"];
             var client = new HttpClient();
-            var request = new HttpRequestMessage(HttpMethod.Get, "http://www.omdbapi.com/?s=interstellar&apikey=7661d96a");
+            var request = new HttpRequestMessage(HttpMethod.Get, $"http://www.omdbapi.com/?s=Fast&apikey={apikey}");
             ApiResponse myInstance = null;
 
             try
