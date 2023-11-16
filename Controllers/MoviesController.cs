@@ -72,19 +72,26 @@ namespace MovieBate.Controllers
                 Type = "movie",
                 Poster = "https://m.media-amazon.com/images/M/MV5BMTM3NTg2NDQzOF5BMl5BanBnXkFtZTcwNjc2NzQzOQ@@._V1_SX300.jpg"
             };
-          //  _context.Movies.Add(movie);
+        
+            
+           
             await _context.SaveChangesAsync();
 
 
 
             return View(myInstance);
         }
-        [HttpPost]
-        [Route("/Movies/{id}")]
-        public async Task<IActionResult> MovieShow(int id,Comment comment)
+        
+        [Route("movies/{id}")]
+        public async Task<IActionResult> Show(int id,Comment comment)
         {
-           
-           
+            if (id == null)
+            {
+                return NotFound();
+            }
+            _context.Movies.Where(e => e.Id == id).Any();
+            
+                var movie = _context.Movies.Find(id);
 
             if (Request.Cookies["AnonUser"] == null)
             {
@@ -111,7 +118,41 @@ namespace MovieBate.Controllers
             _context.Comments.Add(comment);
             _context.SaveChanges();
 
+            
+            return View(movie);
+
+            
+           
+
+
+        }
+        [HttpPost]
+        public IActionResult Edit( int commentId)
+        {
+            
+
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Update( int commentId, Comment comment)
+        {
+            comment.Id = commentId;
+            
+            _context.Comments.Update(comment);
+            _context.SaveChanges();
+
+            return RedirectToAction("Show");
+        }
+
+
+        [HttpPost]
+        public IActionResult Delete( int commentId, Comment comment)
+        {
+            comment.Id = commentId;
+            _context.Comments.Remove(comment);
+            _context.SaveChanges();
+            return RedirectToAction("Show");
         }
 
     }

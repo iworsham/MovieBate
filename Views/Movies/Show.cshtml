@@ -1,5 +1,7 @@
 ﻿@model MovieBate.Models.Movie
-
+@{
+    string anonId = ViewData["AnonUserId"] as string;
+}
 
 
 
@@ -8,7 +10,7 @@
        
         
            
-                <h4>@Model.Type</h4>
+               
 
 
                
@@ -23,3 +25,4 @@
 
 
     
+           

@@ -15,7 +15,7 @@ html {
 
 body {
     margin-bottom: 60px;
-    background-color: darkred;
+    background-color: rosybrown;
 }
 
 input {
@@ -54,9 +54,18 @@ h3 {
 p {
     color: White;
 }
+button {
+    display: flex;
+    flex-direction: column;
+    /*    padding-bottom: 5px;*/
+    border: solid;
+    border-radius: 10px;
+    border-width: 2px;
+}
+
 
 .navbar.bg-white {
-    background-color: maroon !important;
+    background-color: maroon!important;
      border-color: maroon;
 }
 .movie-poster {

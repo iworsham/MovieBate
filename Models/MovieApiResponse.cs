@@ -12,7 +12,7 @@ namespace MovieBate.Models
         public string Type { get; set; }
         //public string Plot { get; set; }
         public string Poster { get; set; }
-        public List<Comment> Comments { get; set; } = new List<Comment>();
+        public List<Comment>? Comments { get; set; } = new List<Comment>();
     }
 
     public class ApiResponse
