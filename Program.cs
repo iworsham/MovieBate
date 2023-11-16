@@ -1,7 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using MovieBate.DataAccess;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<MovieBateContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("MovieBateDB") ?? throw new InvalidOperationException("Connection string 'MovieBateDb' not found.")).UseSnakeCaseNamingConvention());
 
 var app = builder.Build();
 

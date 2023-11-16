@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MovieBate.Models;
+using MovieBate.Services;
 using System.Diagnostics;
 
 namespace MovieBate.Controllers
@@ -7,16 +8,19 @@ namespace MovieBate.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+      
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            
         }
 
         public IActionResult Index()
         {
             return View();
         }
+
 
         public IActionResult Privacy()
         {

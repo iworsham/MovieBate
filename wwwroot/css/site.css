@@ -1,18 +1,73 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: rosybrown;
+}
+
+input {
+    display: flex;
+    flex-direction: column;
+    /*    padding-bottom: 5px;*/
+    border: solid;
+    border-radius: 10px;
+    border-width: 2px;
+}
+
+label {
+    padding-top: 10px;
+    font-size: 28px;
+}
+
+
+
+    button:hover {
+        background-color: transparent;
+    }
+
+h1 {
+    color: White;
+}
+
+h5 {
+    padding-bottom: 40px;
+    color: White;
+}
+
+h3 {
+    color: White;
+}
+
+p {
+    color: White;
+}
+button {
+    display: flex;
+    flex-direction: column;
+    /*    padding-bottom: 5px;*/
+    border: solid;
+    border-radius: 10px;
+    border-width: 2px;
+}
+
+
+.navbar.bg-white {
+    background-color: maroon!important;
+     border-color: maroon;
+}
+.movie-poster {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }

@@ -1,0 +1,64 @@
+﻿<link href="/css/site.css" rel="stylesheet" />
+@model MovieBate.Models.ApiResponse
+
+
+<div class="row">
+
+
+
+@{
+        <div class="col">
+            <h4>@Model.Search[0].Type</h4>
+            <form action="/movies/1 ">
+                <button type="submit">  <img src="@Model.Search[0].Poster" alt="Movie Poster" class="movie-poster" /></button>
+            </form>
+            <p></p>
+            <H5>@Model.Search[0].Title</H5>
+            <p>Year: @Model.Search[0].Year</p>
+            <p>Movie/Series Description Coming Soon!</p>
+        </div>
+        <div class="col">
+            <h4>@Model.Search[1].Type</h4>
+            <form action="/movies/2 ">
+                <button type="submit">  <img src="@Model.Search[1].Poster" alt="Movie Poster" class="movie-poster" /></button>
+            </form>
+            <p></p>
+            <H5>@Model.Search[1].Title</H5>
+            <p>Year: @Model.Search[1].Year</p>
+            <p>Movie/Series Description Coming Soon!</p>
+        </div>
+        <div class="col">
+            <h4>@Model.Search[2].Type</h4>
+            <form action="/movies/3 ">
+                <button type="submit">  <img src="@Model.Search[2].Poster" alt="Movie Poster" class="movie-poster" /></button>
+            </form>
+            <p></p>
+            <H5>@Model.Search[2].Title</H5>
+            <p>Year: @Model.Search[2].Year</p>
+            <p>Movie/Series Description Coming Soon!</p>
+        </div>
+
+
+
+    for(int i = 3; i < Model.Search.Count; i++)
+{
+    <div class="col">
+    <h4>@Model.Search[i].Type</h4>
+    <form action="/movies/Model.Search[i].Id ">
+        <button type="submit">  <img src="@Model.Search[i].Poster" alt="Movie Poster" class="movie-poster" /></button>
+     </form>
+    <p></p>
+    <H5>@Model.Search[i].Title</H5>
+    <p>Year: @Model.Search[i].Year</p>
+    <p>Movie/Series Description Coming Soon!</p>
+       </div>
+           
+       
+};
+
+
+
+}
+</div>
+
+
