@@ -11,8 +11,8 @@
 {
     <div class="col">
     <h4>@movie.Type</h4>
-    <form action="/movies/@Model.Id">
-    <input type="image" src="@movie.Poster" name="movie poster" class="movie-poster" id="saveForm" />
+    <form action="/movies/@movie.Id">
+    <button type="submit">  <img src="@movie.Poster" alt="Movie Poster" class="movie-poster" /></button>    
     </form>
     <p></p>
     <H5>@movie.Title</H5>

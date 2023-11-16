@@ -63,7 +63,17 @@ namespace MovieBate.Controllers
                 // Handle the case where myInstance is still null
                 // Return an appropriate view or error message
             }
-           
+
+            var movie = new Movie
+            {
+                Title = "Fast & Furious 6",
+                Year = "2013",
+                ImdbID = "tt1905041",
+                Type = "movie",
+                Poster = "https://m.media-amazon.com/images/M/MV5BMTM3NTg2NDQzOF5BMl5BanBnXkFtZTcwNjc2NzQzOQ@@._V1_SX300.jpg"
+            };
+          //  _context.Movies.Add(movie);
+            await _context.SaveChangesAsync();
 
 
 
@@ -71,9 +81,10 @@ namespace MovieBate.Controllers
         }
         [HttpPost]
         [Route("/Movies/{id}")]
-        public async Task<IActionResult> MovieShow(int id,Comment comment,Movie movie)
+        public async Task<IActionResult> MovieShow(int id,Comment comment)
         {
-            //movie.ImdbID = id;
+           
+           
 
             if (Request.Cookies["AnonUser"] == null)
             {
