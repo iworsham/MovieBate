@@ -89,71 +89,19 @@ namespace MovieBate.Controllers
             {
                 return NotFound();
             }
-            _context.Movies.Where(e => e.Id == id).Any();
-            
-                var movie = _context.Movies.Find(id);
-
-            if (Request.Cookies["AnonUser"] == null)
+            else if (_context.Movies.Where(e => e.Id == id).Any())
             {
-                string anonId = Guid.NewGuid().ToString();
-                var anonUser = new User();
-
-                anonUser.Id = anonId;
-                Response.Cookies.Append("AnonUser", anonId);
-                comment.AnonId = anonId;
-                comment.CreatedAt = DateTime.Now.ToUniversalTime();
-                anonUser.Comments.Add(comment);
+                var movie = _context.Movies.Find(id);
+                return View(movie);
             }
             else
             {
-                var anonUser = new User();
+                return NotFound();
 
-                anonUser.Id = Request.Cookies["AnonUser"];
-
-                comment.CreatedAt = DateTime.Now.ToUniversalTime();
-                comment.AnonId = anonUser.Id;
-                anonUser.Comments.Add(comment);
             }
 
-            _context.Comments.Add(comment);
-            _context.SaveChanges();
-
-            
-            return View(movie);
-
-            
-           
-
-
         }
-        [HttpPost]
-        public IActionResult Edit( int commentId)
-        {
-            
-
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Update( int commentId, Comment comment)
-        {
-            comment.Id = commentId;
-            
-            _context.Comments.Update(comment);
-            _context.SaveChanges();
-
-            return RedirectToAction("Show");
-        }
-
-
-        [HttpPost]
-        public IActionResult Delete( int commentId, Comment comment)
-        {
-            comment.Id = commentId;
-            _context.Comments.Remove(comment);
-            _context.SaveChanges();
-            return RedirectToAction("Show");
-        }
+    
 
     }
 }
