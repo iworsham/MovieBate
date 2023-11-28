@@ -1,22 +1,65 @@
-﻿@model MovieBate.Models.Movie
+﻿<link href="css/site.css" rel="stylesheet"/>
+
+@model MovieBate.Models.Movie
+
 @{
     string anonId = ViewData["AnonUserId"] as string;
 }
 
-
+<div class="home-flex">
 
 
     
-       
+       <div class="column1">
                 <input type="image" src="@Model.Poster" name="movie poster" class="movie-poster" id="saveForm" />
 
                 <p></p>
                 <H5>@Model.Title</H5>
                 
                 <p>Movie/Series Description Coming Soon!</p>
+                </div>
             
 
 
+    <div class="column2">
+        <h1>Comments</h1>
+        <form action="/Movies/@Model.Id/Comments/New" method="post">
+            <textarea rows="4" cols="50" name="Content" style="width: 400px"></textarea>
+            <input hidden value="@Model.Id" name="MovieId" />
+            <br />
+            <button type="submit">Send</button>
 
+        </form>
+        @{
+            @foreach (var comment in Model.Comments)
+            {
+                if (anonId == comment.AnonId)
+                {
+                    <p>@comment.Content</p>
+                    <form action="/Movies/@Model.Id/Comments/Edit" method="post">
+                        <textarea rows="4" cols="50" name="Content" style="width: 400px"></textarea>
+                        <input hidden value="@Model.Id" name="MovieId" />
+                        <br />
+                        <button type="submit">Send</button>
+
+                    </form>
+                    <form action="/Movies/@Model.Id/Comments/Delete" method="post">
+                    <button type="submit">Delete</button>
+                    </form>
+
+                }
+                else
+                {
+                    <p>@comment.Content</p>
+                }
+            }
+        }
+
+    </div>
+    
+
+
+
+    </div>
     
            

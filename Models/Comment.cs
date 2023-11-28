@@ -6,6 +6,6 @@
         public string Content { get; set; }
         public DateTime CreatedAt { get; set; }
         public string AnonId { get; set; }
-        public Movie movie { get; set; }
+        public Movie Movie { get; set; }
     }
 }
