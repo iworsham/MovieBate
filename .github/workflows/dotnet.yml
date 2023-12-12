@@ -28,3 +28,8 @@ jobs:
       run: dotnet test --no-build --verbosity normal
     - name: Publish
       run: dotnet publish -r linux-x64 -o site;zip -r MovieBate.zip site
+    - name: Upload
+    - uses: actions/upload-artifact@v3
+      with:
+       name: MovieBate.zip
+
