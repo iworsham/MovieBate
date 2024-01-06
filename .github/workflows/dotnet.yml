@@ -41,6 +41,6 @@ jobs:
       if: startsWith(github.ref, 'refs/tags/')
       with:
        files: MovieBate.zip 
-              efbundle
+              MovieBate/efbundle
               
   
