@@ -34,7 +34,6 @@ jobs:
       run: |
         dotnet tool install -g dotnet-ef --version 6.0.25
         dotnet-ef migrations bundle --self-contained -r linux-x64
-        find: -name efbundle\*
     - name: Release
       env:
        GITHUB_TOKEN: ${{ secrets.HIDDENTOK }}
